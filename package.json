@@ -1,0 +1,17 @@
+{
+  "name": "cfe-frontend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite build --mode development --base /static/vue-dev/ --outDir ./src/static/vue-dev/ -w",
+    "build": "vite build --mode production --base /static/vue-prod/ --outDir ./src/static/vue-prod/",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "vite": "^4.0.0"
+  }
+}
