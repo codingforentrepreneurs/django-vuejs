@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block content %}
-<h1>Hello world</h1>
 
-
+<div id="app" data-token="{{ csrf_token }}" {% if user.is_authenticated %}data-user="{{ user }}" {% endif %}></div>
 
 {% endblock %}

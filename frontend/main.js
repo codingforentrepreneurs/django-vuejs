@@ -3,4 +3,9 @@ import App from './App.vue'
 
 import './assets/main.css'
 
-createApp(App).mount('#app')
+const el = document.getElementById('app')
+if (el) {
+    console.log(el.dataset)
+    createApp(App).mount('#app') // id="app"
+}
+
