@@ -3,12 +3,16 @@
 <html>
     <head>
         <meta charset="utf-8">
+
+        {% for file in vue_css_paths %}
+        <link rel="stylesheet" href="{% static file %}" />
+        {% endfor %}
     </head>
     <body>
         {% block content %}
         {% endblock %}
         {% for file in vue_js_paths %}
-   <script src="{% static file %}"></script>
-{% endfor %}
+        <script src="{% static file %}"></script>
+        {% endfor %}
     </body>
 </html>

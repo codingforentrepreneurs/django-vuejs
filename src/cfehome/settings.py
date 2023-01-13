@@ -24,6 +24,7 @@ SECRET_KEY = 'django-insecure-a00s&ye3i$9_m)830u@i**519j=kh6nb_)-q7c1udh#fnhy7gp
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+VUE_PROD = False
 
 ALLOWED_HOSTS = []
 
@@ -117,8 +118,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_BASE_DIR = BASE_DIR / "static"
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    STATICFILES_BASE_DIR,
 ]
 STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"
 MEDIA_URL = 'media/'
