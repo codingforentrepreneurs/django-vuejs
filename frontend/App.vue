@@ -1,25 +1,23 @@
 <script setup>
 import {ref} from 'vue'
 import TheWelcome from './components/TheWelcome.vue'
+import store from './store'
 const props = defineProps({
     token: String,
     user: String
 })
-const token = props.token ? props.token: null
+
+if (props.token) {
+  store.setToken(props.token)
+}
 const username = props.user ? props.user: ''
 
-let count = ref(0)
-
-function increment (event) {
-  console.log(event)
-  count.value++
-}
 </script>
 
 <template>
   <header>
-    {{ count }} - {{  token  }} - {{ username }}
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" @click="increment" />
+    {{ store.count }} - {{  store.token  }} - {{ username }}
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" @click="store.increment" />
 
     <div class="wrapper">
 
