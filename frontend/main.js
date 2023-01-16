@@ -5,7 +5,8 @@ import './assets/main.css'
 
 const el = document.getElementById('app')
 if (el) {
-    console.log(el.dataset)
-    createApp(App).mount('#app') // id="app"
+    const data = {...el.dataset}
+    // <App :token="abc" :user="some-user" />
+    createApp(App, data).mount('#app') // id="app"
 }
 

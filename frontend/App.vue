@@ -1,9 +1,17 @@
 <script setup>
 import TheWelcome from './components/TheWelcome.vue'
+const props = defineProps({
+    token: String,
+    user: String
+})
+const token = props.token ? props.token: null
+const username = props.user ? props.user: ''
+console.log(props.token)
 </script>
 
 <template>
   <header>
+    {{  token  }} - {{ username }}
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
