@@ -19,10 +19,13 @@ onMounted(async ()=>{
         data.title = responseData
     } else {
         data.title  = "Post"
-        data.contentList = responseData
+        data.contentList = responseData.data
     }
+
  
 })
+
+
 
 
 
@@ -31,5 +34,8 @@ onMounted(async ()=>{
 <template>
     <div>
         <h1>{{ data.title }}</h1>
+        <div v-for="post of data.contentList" :key="post.id">
+            {{ post.id }} - {{ post.title }}
+        </div>
     </div>
 </template>
