@@ -1,6 +1,6 @@
 <script setup>
 import ApiGetRequest from './components/ApiGetRequest.vue';
-import TheWelcome from './components/TheWelcome.vue'
+import CreateForm from './components/CreateForm.vue'
 import store from './store'
 const props = defineProps({
     token: String,
@@ -20,7 +20,8 @@ const username = props.user ? props.user: ''
   </header>
 
   <main>
-    <TheWelcome />
+    <CreateForm />
+   
   </main>
 </template>
 
