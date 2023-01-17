@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue'
+import ApiGetRequest from './components/ApiGetRequest.vue';
 import TheWelcome from './components/TheWelcome.vue'
 import store from './store'
 const props = defineProps({
@@ -16,12 +16,7 @@ const username = props.user ? props.user: ''
 
 <template>
   <header>
-    {{ store.count }} - {{  store.token  }} - {{ username }}
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" @click="store.increment" />
-
-    <div class="wrapper">
-
-    </div>
+    <ApiGetRequest />
   </header>
 
   <main>
