@@ -1,6 +1,8 @@
 <script setup>
+import axios from 'axios'
+import store from './../store'
 import {reactive} from 'vue'
-let formData = reactive({
+const formData = reactive({
     'title': '',
     'slug': '',
 })
@@ -9,6 +11,23 @@ const handleAutoSlugChange = (event) =>{
     // console.log(event.target.value)
     // formData.slug = slugify(event.target.value)
     formData.slug = event.target.value
+}
+
+const handleSubmitForm = async (event) => {
+    if (event) {
+        event.preventDefault()
+    }
+    const formDataJson= JSON.stringify(formData)
+    const csrfToken = store.token
+    const axiosConfig = {headers: {"X-CSRFToken": csrfToken}}
+    let response;
+    try {
+        response = await axios.post('/api/posts/create/', formDataJson, axiosConfig)
+    } catch(error) {
+        response = error.response
+    }
+    console.log(response)
+    
 }
 
 </script>
@@ -24,10 +43,10 @@ const handleAutoSlugChange = (event) =>{
 
     </div>
     <div>
-
         <p>Preview:</p>
         <p>Title: {{ formData.title  }}</p>
         <p>Slug: {{ formData.slug  }}</p>
+        <button @click="handleSubmitForm">Send</button>
     </div>
     </div>
 </template>
