@@ -1,11 +1,14 @@
 <script setup>
 import axios from 'axios'
 import store from './../store'
-import {reactive} from 'vue'
-const formData = reactive({
-    'title': '',
+import {ref, reactive} from 'vue'
+const initFormData = {
+    'title': 'New title',
     'slug': '',
-})
+    'content': '',
+}
+const formData = reactive({...initFormData})
+const error = ref({})
 const handleAutoSlugChange = (event) =>{
     // console.log(formData.title)
     // console.log(event.target.value)
@@ -21,15 +24,26 @@ const handleSubmitForm = async (event) => {
     const innerFormData = new FormData(target)
     const innerFormDataJson = JSON.stringify(Object.fromEntries(innerFormData))
     const formDataJson= JSON.stringify(formData)
-    console.log(innerFormDataJson, formDataJson)
     const csrfToken = store.token
     const axiosConfig = {headers: {"X-CSRFToken": csrfToken}}
     let response;
     try {
         response = await axios.post('/api/posts/create/', formDataJson, axiosConfig)
-    } catch(error) {
-        response = error.response
+    } catch(err) {
+        response = err.response
+        error.value = err.response
+        
     }
+    
+    if (response.status === 201) {
+        for (let key of Object.keys(formData)) {
+            formData[key] = initFormData[key]
+        }
+    }
+    if (response.status === 500) {
+        alert("Server failed, please try again.")
+    }
+    console.log(error.value)
     console.log(response)
     
 }
@@ -48,7 +62,7 @@ const handleSubmitForm = async (event) => {
 
         </div>
         <div>
-            <input type="text" required v-model="formData.slugger" name="slugger" placeholder="your-blog-slug"/>
+            <textarea name="content" v-model="formData.content"></textarea>
         </div>
         <div>
             <p>Preview:</p>

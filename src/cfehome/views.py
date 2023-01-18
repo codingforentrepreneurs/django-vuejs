@@ -2,6 +2,8 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render
 
+from contents.forms import ContentForm
+from contents.models import Content
 
 def home_view(request):
     return render(request, "home.html", {"files_": []})
@@ -31,7 +33,17 @@ def api_content_create_view(request):
     title = data.get('title') or None
     if 'abc' in title:
         return JsonResponse({'detail': f"{title} is invalid. please remove abc."}, status=400)
-    # form = SomeModelForm(data)
-    # if form.is_valid():
-    # Model.objects.creates(**data)
-    return JsonResponse(data, status=201)
+    form = ContentForm(data)
+    if form.is_valid():
+        obj = form.save(commit=False)
+        print(obj, request.user)
+        obj.save()
+        data = {
+            "id": obj.id,
+            "title": obj.title,
+            "isCreated":True,
+            "content": obj.content
+        }
+        return JsonResponse(data, status=201)
+    errors = json.loads(form.errors.as_json())
+    return JsonResponse(errors, status=400)
