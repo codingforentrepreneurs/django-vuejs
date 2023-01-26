@@ -25,7 +25,7 @@ const handleSubmitForm = async (event) => {
     const innerFormDataJson = JSON.stringify(Object.fromEntries(innerFormData))
     const formDataJson= JSON.stringify(formData)
     const csrfToken = store.token
-    const axiosConfig = {headers: {"X-CSRFToken": csrfToken}}
+    const axiosConfig = {headers: {"X-CSRFToken": csrfToken}, withCredentials:true, xsrfHeaderName: 'X-CSRFToken', xsrfCookieName: 'csrftoken'}
     let response;
     try {
         response = await axios.post('/api/posts/create/', formDataJson, axiosConfig)

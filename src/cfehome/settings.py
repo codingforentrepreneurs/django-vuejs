@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-a00s&ye3i$9_m)830u@i**519j=kh6nb_)-q7c1udh#fnhy7gp
 DEBUG = True
 VUE_PROD = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    ".desalsa.io",
+    ".cfe.sh"
+]
 
 
 # Application definition
@@ -38,18 +41,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
+    # inline
     'contents',
+    
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_URLS_REGEX = r"^/api/.*$"
 
 ROOT_URLCONF = 'cfehome.urls'
 
@@ -117,17 +127,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_BASE_DIR = BASE_DIR / "static"
 STATICFILES_DIRS = [
     STATICFILES_BASE_DIR,
 ]
-STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"
+STATIC_ROOT = BASE_DIR / "local-cdn" / "static"
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR.parent / "local-cdn" / "media"
-
-
+MEDIA_ROOT = BASE_DIR / "local-cdn" / "media"
+CSRF_TRUSTED_ORIGINS = [
+    "http://*.desalsa.io:8200",
+    "https://*.cfe.sh",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

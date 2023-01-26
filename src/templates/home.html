@@ -3,6 +3,15 @@
 
 {% block content %}
 
-<div id="app" data-token="{{ csrf_token }}" {% if user.is_authenticated %}data-user="{{ user }}" {% endif %}></div>
+<div style="margin:0rem; position: absolute; top:0px; padding:3rem; border-radius: 0px; background-color: blanchedalmond;width: 100%; color:black">
+    <h1>DEMO SITE</h1> 
+    <p>This course is heavily code-focused thus the UI is pretty basic.</p>
+    <br/>
+    <p> Review the code <a href="https://github.com/codingforentrepreneurs/django-vuejs">here</a>.</p>
+    <p> Watch the <a href="https://www.codingforentrepreneurs.com/courses/django-vuejs-3/">course here</a>. </p>
+</div>
 
+<div style="width:850px">
+    <div  id="app" data-token="{{ csrf_token }}" {% if user.is_authenticated %}data-user="{{ user }}" {% endif %}></div>
+</div>
 {% endblock %}
