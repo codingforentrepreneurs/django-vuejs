@@ -11,7 +11,7 @@
     <p> Watch the <a href="https://www.codingforentrepreneurs.com/courses/django-vuejs-3/">course here</a>. </p>
 </div>
 
-<div style="width:850px">
+<div style="width:850px;top:15rem;">
     <div  id="app" data-token="{{ csrf_token }}" {% if user.is_authenticated %}data-user="{{ user }}" {% endif %}></div>
 </div>
 {% endblock %}
